@@ -1,0 +1,18 @@
+﻿@page "/"
+
+@inject IJSRuntime JS
+
+<canvas @ref="canvasContext"/>
+
+@code {
+
+    ElementReference canvasContext;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeAsync<IJSObjectReference>("atramentWrapper.initializeCanvas", canvasContext);
+        }
+    }
+}
